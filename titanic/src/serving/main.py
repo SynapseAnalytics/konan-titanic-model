@@ -9,7 +9,7 @@ import pandas as pd
 
 TEST_DATA_PATH = 'data/final/test.csv'
 TEST_DATA_SAMPLE_START = 0
-TEST_DATA_SAMPLE_SIZE = 10
+TEST_DATA_SAMPLE_SIZE = 100
 
 
 def simulate_serving():
@@ -30,10 +30,11 @@ def simulate_serving():
             'survived',
         ]
     )
-    y_test = df[['survived']]
+    X_test = X_test.fillna(0)
+    y_test = df['survived']
 
     requests = X_test.to_dict(orient='records')
-    ground_truths = y_test.to_dict(orient='records')
+    ground_truths = y_test
 
     sdk = KonanSDK(
         auth_url=os.environ['KONAN_AUTH_URL'],
@@ -54,7 +55,7 @@ def simulate_serving():
         )
         prediction_uuids.append(prediction_uuid)
 
-    sleep(30)
+    sleep(5)
 
     sdk.feedback(
         deployment_uuid=os.environ['KONAN_DEPLOYMENT_UUID'],
