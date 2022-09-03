@@ -21,14 +21,13 @@ jobs:
     - 
       name: Configure poetry
       shell: bash
-      run: python -m poetry config virtualenvs.in-project true
+      run: poetry config virtualenvs.in-project true
     - 
       name: View poetry version
       run: poetry --version
     - 
       name: Install dependencies
-      run: |
-        python -m poetry install
+      run: poetry install
     - 
       name: Login to DockerHub
       uses: docker/login-action@v2
@@ -36,8 +35,10 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
     - 
-      name: Prepare svr build
-      run: ./build.sh gaussian
+      name: Prepare gaussian build
+      run: |
+        which python
+        ./build.sh gaussian
     -
       name: Push gaussian tag
       uses: docker/build-push-action@v3

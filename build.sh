@@ -35,4 +35,4 @@ cp -r titanic/src/playground/utils/* "$KONAN_BUILD_PATH/app/src/utils"
 # Copy over app/artifacts files
 mkdir -p "$KONAN_BUILD_PATH/app/artifacts"
 cp data/metadata.yml "$KONAN_BUILD_PATH/app/artifacts/metadata.yml"
-export KONAN_MODEL_CLASSIFIER_NAME="$1" && export KONAN_MODEL_ARTIFACTS_PATH="$KONAN_BUILD_PATH/app/artifacts" && python titanic/src/playground/train.py titanic/src/playground/train.py
+export KONAN_MODEL_CLASSIFIER_NAME="$1" && export KONAN_MODEL_ARTIFACTS_PATH="$KONAN_BUILD_PATH/app/artifacts" && python titanic/src/playground/train.py
