@@ -42,8 +42,8 @@ class MyPredictionRequest(KonanServiceBasePredictionRequest):
     embarked: EmbarkedPorts = None
     title: Titles
 
-    class Config:  
-        use_enum_values = True 
+    class Config:
+        use_enum_values = True
 
 
 class MyPredictionResponse(KonanServiceBasePredictionResponse):

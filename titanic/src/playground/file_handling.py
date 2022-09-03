@@ -16,7 +16,7 @@ def split_kaggle_data(
 ) -> None:
     dataset = pd.read_csv(f'{source_directory}/train.csv')
     dataset["survived"] = dataset["survived"].map({0: "no", 1: "yes"})
-    
+
     features = dataset.drop('survived', axis=1)
     features = preprocess_features(features)
     features = filter_features(features)

@@ -38,7 +38,7 @@ def run_training(
         y_train=y_train,
     )
 
-    _y_pred_train = _predict(
+    _ = _predict(
         model=_fit_model,
         X=X_train,
     )

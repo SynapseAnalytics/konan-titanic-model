@@ -22,7 +22,7 @@ class Titles(str, Enum):
     Master = "Master"
     Miss = "Miss"
     Mr = "Mr"
-    Mrs = "Mrs"    
+    Mrs = "Mrs"
     Other = "Rare"
 
 

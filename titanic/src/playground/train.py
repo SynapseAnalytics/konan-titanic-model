@@ -34,7 +34,7 @@ metadata = read_metadata()
 
 
 # ------------------------------------------------------------------- #
-y_train: pd.Series = train['survived'].map({"no": 0, "yes": 1,})
+y_train: pd.Series = train['survived'].map({"no": 0, "yes": 1})
 
 
 # ------------------------------------------------------------------- #

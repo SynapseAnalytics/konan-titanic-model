@@ -15,8 +15,8 @@ def preprocess_features(
     _df = features.copy()
 
     # Construct Title feature from Name
-    _df['title'] = _df['name'].str.extract(' ([A-Za-z]+)\.', expand=False)
-    _df['title'] = _df['title'].replace(['Lady', 'Countess','Capt', 'Col', 'Don', 'Dr', 'Major', 'Rev', 'Sir', 'Jonkheer', 'Dona'], 'Rare')
+    _df['title'] = _df['name'].str.extract(' ([A-Za-z]+)\\.', expand=False)
+    _df['title'] = _df['title'].replace(['Lady', 'Countess', 'Capt', 'Col', 'Don', 'Dr', 'Major', 'Rev', 'Sir', 'Jonkheer', 'Dona'], 'Rare')
     _df['title'] = _df['title'].replace('Mlle', 'Miss')
     _df['title'] = _df['title'].replace('Ms', 'Miss')
     _df['title'] = _df['title'].replace('Mme', 'Mrs')
