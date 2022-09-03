@@ -6,7 +6,7 @@ from file_handling import (
     read_metadata,
     read_data,
 )
-from utils..encoding import (
+from utils.encoding import (
     one_hot_encode,
     ordinal_encode,
 )

@@ -9,7 +9,7 @@ import pandas as pd
 
 TEST_DATA_PATH = 'data/final/test.csv'
 TEST_DATA_SAMPLE_START = 0
-TEST_DATA_SAMPLE_SIZE = 100
+TEST_DATA_SAMPLE_SIZE = 10
 
 
 def simulate_serving():
@@ -27,10 +27,10 @@ def simulate_serving():
 
     X_test = df.drop(
         columns=[
-            'SalePrice',
+            'survived',
         ]
     )
-    y_test = df[['SalePrice']]
+    y_test = df[['survived']]
 
     requests = X_test.to_dict(orient='records')
     ground_truths = y_test.to_dict(orient='records')

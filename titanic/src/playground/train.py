@@ -71,6 +71,7 @@ X_train = X_train.fillna(0)
 # # ------------------------------------------------------------------- #
 # # Train and test the model
 
+print(CLASSIFIER_NAME)
 fit_classifier = run_training(
     classifier_name=CLASSIFIER_NAME,
     classifier=CLASSIFIERS_MAPPING.get(CLASSIFIER_NAME, None),
