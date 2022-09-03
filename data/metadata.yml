@@ -1,0 +1,18 @@
+ordinalEncoding:
+  sex:
+    - female
+    - male
+  title:
+    - Mr
+    - Miss
+    - Mrs
+    - Master
+    - Rare
+oneHotEncoding:
+  - embarked
+meanImputing:
+  - age
+  - fare
+modeImputing:
+  - embarked
+ 
