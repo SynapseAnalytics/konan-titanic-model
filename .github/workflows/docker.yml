@@ -36,9 +36,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
     - 
       name: Prepare gaussian build
-      run: |
-        which python
-        ./build.sh gaussian
+      run: . ./build.sh gaussian
     -
       name: Push gaussian tag
       uses: docker/build-push-action@v3
@@ -48,7 +46,7 @@ jobs:
         tags: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/konan-titanic-model:${{ github.ref_name }}-gaussian
     - 
       name: Prepare knn build
-      run: ./build.sh knn
+      run: . ./build.sh knn
     -
       name: Push knn tag
       uses: docker/build-push-action@v3
