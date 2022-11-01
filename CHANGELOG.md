@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.4 (2022-11-01)
+### Fix
+* **retraining:** Fix some error checking ([`5c09b22`](https://github.com/SynapseAnalytics/konan-titanic-model/commit/5c09b22df11699d58d63d0e42a56bfb0e1e9304d))
+* **retraining:** Fix retraining root path ([`664eb93`](https://github.com/SynapseAnalytics/konan-titanic-model/commit/664eb93ef35858900bf2057ccb08c911ac6b0974))
+
 ## v0.1.3 (2022-09-08)
 ### Fix
 * **actions:** Fix using poetry ([`0c6fc69`](https://github.com/SynapseAnalytics/konan-titanic-model/commit/0c6fc69b2ae6a9e1aab342d55b158da11dfb8ac6))
