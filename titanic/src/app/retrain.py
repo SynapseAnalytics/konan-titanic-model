@@ -39,7 +39,7 @@ def retrain():
         pass
 
     if training_data is not None:
-        LOGGER.info('Successfuly read training data %d rows and %d columns' % training_data.shape)        
+        LOGGER.info('Successfuly read training data %d rows and %d columns' % training_data.shape)
     if serving_data is not None:
         LOGGER.info('Successfuly read serving data %d rows and %d columns' % serving_data.shape)
     if training_data is None and serving_data is None:
