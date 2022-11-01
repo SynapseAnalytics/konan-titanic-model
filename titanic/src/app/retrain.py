@@ -30,27 +30,21 @@ def retrain():
     try:
         training_data = pd.read_csv(TRAINING_DATA_FILE_PATH)
         training_data['survived'].map({"yes": 1, "no": 0})
-    except Exception:
-        LOGGER.exception()
+    except:
         pass
     try:
         serving_data = pd.read_csv(SERVING_DATA_FILE_PATH)
         serving_data['survived'].map({"yes": 1, "no": 0})
-    except Exception:
-        LOGGER.exception()
+    except:
         pass
 
-    if training_data:
-        LOGGER.info('Successfuly read training data %d rows and %d columns' % training_data.shape)
-    else:
-        LOGGER.warning('Training data not read')
-    if serving_data:
+    if training_data is not None:
+        LOGGER.info('Successfuly read training data %d rows and %d columns' % training_data.shape)        
+    if serving_data is not None:
         LOGGER.info('Successfuly read serving data %d rows and %d columns' % serving_data.shape)
-    else:
-        LOGGER.warning('Serving data not read')
-    if not training_data and not serving_data:
+    if training_data is None and serving_data is None:
         LOGGER.error('Unable to read both training and serving data')
-        return
+        return -1
 
     LOGGER.info('Finished reading data files')
 
