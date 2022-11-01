@@ -11,7 +11,7 @@ import pandas as pd
 from utils.encoding import one_hot_encode, ordinal_encode
 from utils.pipeline import run_testing, run_training
 
-RETRAINING_DIR_PATH = "retraining"
+RETRAINING_DIR_PATH = "/retraining"
 METRICS_FILE_PATH = f"{RETRAINING_DIR_PATH}/metrics.json"
 ARTIFACTS_DIR_PATH = f"{RETRAINING_DIR_PATH}/artifacts"
 DATA_DIR_PATH = f"{RETRAINING_DIR_PATH}/data"
