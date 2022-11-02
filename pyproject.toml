@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "konan-titanic"
-version = "0.1.4"
+version = "0.1.5"
 description = "A Konan-ready ML model, packaged and distributed as a Docker image, to predict the survival of a Titanic passenger"
 authors = ["Synapse Analytics"]
 readme = "README.md"
