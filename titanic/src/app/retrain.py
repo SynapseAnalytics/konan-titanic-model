@@ -1,5 +1,4 @@
 from typing import Optional
-import logging
 import joblib
 import json
 from sklearn.neighbors import KNeighborsClassifier
@@ -18,13 +17,11 @@ DATA_DIR_PATH = f"{RETRAINING_DIR_PATH}/data"
 TRAINING_DATA_FILE_PATH = f"{DATA_DIR_PATH}/training.csv"
 SERVING_DATA_FILE_PATH = f"{DATA_DIR_PATH}/serving.csv"
 
-LOGGER = logging.getLogger(name=__name__)
-
 
 def retrain():
     # ------------------------------------------------------------------- #
     # Read the files
-    LOGGER.info('Reading data files')
+    print('Reading data files')
     training_data: Optional[pd.DataFrame] = None
     serving_data: Optional[pd.DataFrame] = None
     try:
@@ -41,14 +38,14 @@ def retrain():
         pass
 
     if training_data is not None:
-        LOGGER.info('Successfuly read training data %d rows and %d columns' % training_data.shape)
+        print('Successfuly read training data %d rows and %d columns' % training_data.shape)
     if serving_data is not None:
-        LOGGER.info('Successfuly read serving data %d rows and %d columns' % serving_data.shape)
+        print('Successfuly read serving data %d rows and %d columns' % serving_data.shape)
     if training_data is None and serving_data is None:
-        LOGGER.error('Unable to read both training and serving data')
+        print('Unable to read both training and serving data')
         return -1
 
-    LOGGER.info('Finished reading data files')
+    print('Finished reading data files')
 
     data = []
     if training_data is not None:
@@ -58,7 +55,7 @@ def retrain():
 
     # ------------------------------------------------------------------- #
     # Combine and split all data
-    LOGGER.info('Preparing data for retraining')
+    print('Preparing data for retraining')
     df = pd.concat(
         data,
         axis=0,
@@ -69,7 +66,7 @@ def retrain():
         random_state=68,
     )
 
-    LOGGER.info('Attempting to read required metadata file')
+    print('Attempting to read required metadata file')
     with open(f'{ARTIFACTS_DIR_PATH}/metadata.yml') as file:
         metadata = yaml.safe_load(file)
 
@@ -86,7 +83,7 @@ def retrain():
         axis=1,
     )
 
-    LOGGER.info('Preprocessing the data')
+    print('Preprocessing the data')
 
     # ------------------------------------------------------------------- #
     # One-Hot-Encode Categorial Features
@@ -121,7 +118,7 @@ def retrain():
 
     # ------------------------------------------------------------------- #
     # Train and test the model
-    LOGGER.info('Beginning the retraining')
+    print('Beginning the retraining')
     classifier = run_training(
         classifier_name="knn",
         classifier=KNeighborsClassifier(
@@ -130,13 +127,13 @@ def retrain():
         X_train=X_train,
         y_train=y_train,
     )
-    LOGGER.info('Calculating metrics on training data')
+    print('Calculating metrics on training data')
     accuracy_train = run_testing(
         classifier=classifier,
         X_test=X_train,
         y_test=y_train,
     )
-    LOGGER.info('Calculating metrics on testing data')
+    print('Calculating metrics on testing data')
     accuracy_test = run_testing(
         classifier=classifier,
         X_test=X_test,
@@ -145,7 +142,7 @@ def retrain():
 
     # ------------------------------------------------------------------- #
     # Save model artifacts
-    LOGGER.info('Saving retraining artifacts')
+    print('Saving retraining artifacts')
     joblib.dump(
         classifier,
         f'{ARTIFACTS_DIR_PATH}/model.pkl',
@@ -182,11 +179,11 @@ def retrain():
         },
     }
 
-    LOGGER.info('Saving retraining metrics')
+    print('Saving retraining metrics')
     with open(METRICS_FILE_PATH, 'w') as file:
         json.dump(retraining_metrics, file)
 
-    LOGGER.info('Retraining successfully completed')
+    print('Retraining successfully completed')
 
 
 if __name__ == '__main__':
