@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.6 (2022-11-02)
+### Fix
+* **retraining:** Change logging into printing ([`95a7e55`](https://github.com/SynapseAnalytics/konan-titanic-model/commit/95a7e559f645db6e305442b8d7d901a8d6b32302))
+
 ## v0.1.5 (2022-11-02)
 ### Fix
 * **retraining:** Rename the ground_truth column ([`aa03292`](https://github.com/SynapseAnalytics/konan-titanic-model/commit/aa032922ff849ee1c59c4a5e7492edbea3087a15))
