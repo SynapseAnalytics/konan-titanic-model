@@ -34,7 +34,7 @@ def simulate_serving():
     y_test = df['survived']
 
     requests = X_test.to_dict(orient='records')
-    ground_truths = y_test
+    ground_truths = []
 
     sdk = KonanSDK(
         auth_url=os.environ['KONAN_AUTH_URL'],
@@ -48,12 +48,16 @@ def simulate_serving():
     )
 
     prediction_uuids: List[str] = []
-    for req in requests:
-        prediction_uuid, _ = sdk.predict(
-            deployment_uuid=os.environ['KONAN_DEPLOYMENT_UUID'],
-            input_data=req,
-        )
-        prediction_uuids.append(prediction_uuid)
+    for i, req in enumerate(requests):
+        try:
+            prediction_uuid, _ = sdk.predict(
+                deployment_uuid=os.environ['KONAN_DEPLOYMENT_UUID'],
+                input_data=req,
+            )
+            prediction_uuids.append(prediction_uuid)
+            ground_truths.append(y_test[i])
+        except Exception:
+            pass
 
     sleep(5)
 
