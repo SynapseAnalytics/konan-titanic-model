@@ -34,6 +34,8 @@ def retrain():
         pass
     try:
         serving_data = pd.read_csv(SERVING_DATA_FILE_PATH)
+        # rename "ground_truth" to "survived"
+        serving_data.rename(columns={'ground_truth': 'survived'}, inplace=True)
         serving_data['survived'].map({"yes": 1, "no": 0})
     except:
         pass
