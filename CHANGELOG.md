@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.8 (2022-12-15)
+### Fix
+* **actions:** Bump relekang/python-semantic-release to 7.32.2 ([`0a5161d`](https://github.com/SynapseAnalytics/konan-titanic-model/commit/0a5161d04a0b990a0c7f1e0182eefbf6de43d901))
+
 ## v0.1.7 (2022-12-15)
 ### Fix
 * **retraining:** Throw error on failure ([`7aeebb9`](https://github.com/SynapseAnalytics/konan-titanic-model/commit/7aeebb9a4e42f6630508f53896e525e3848c58bc))
