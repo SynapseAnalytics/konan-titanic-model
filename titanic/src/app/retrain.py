@@ -1,11 +1,12 @@
-from typing import Optional
 import joblib
 import json
-from sklearn.neighbors import KNeighborsClassifier
+import sys
 import yaml
+from typing import Optional
 
-from sklearn.model_selection import train_test_split
 import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
 
 from utils.encoding import one_hot_encode, ordinal_encode
 from utils.pipeline import run_testing, run_training
@@ -42,8 +43,7 @@ def retrain():
     if serving_data is not None:
         print('Successfuly read serving data %d rows and %d columns' % serving_data.shape)
     if training_data is None and serving_data is None:
-        print('Unable to read both training and serving data')
-        return -1
+        sys.exit('Unable to read both training and serving data')
 
     print('Finished reading data files')
 
