@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.7 (2022-12-15)
+### Fix
+* **retraining:** Throw error on failure ([`7aeebb9`](https://github.com/SynapseAnalytics/konan-titanic-model/commit/7aeebb9a4e42f6630508f53896e525e3848c58bc))
+
 ## v0.1.6 (2022-11-02)
 ### Fix
 * **retraining:** Change logging into printing ([`95a7e55`](https://github.com/SynapseAnalytics/konan-titanic-model/commit/95a7e559f645db6e305442b8d7d901a8d6b32302))
