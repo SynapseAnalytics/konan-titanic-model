@@ -3,13 +3,15 @@ import json
 import pydantic
 import yaml
 
+import numpy as np
 import pandas as pd
 
 from konan_sdk.konan_service.models import KonanServiceBaseModel
 from konan_sdk.konan_service.services import KonanService
 from konan_sdk.konan_service.serializers import (
     KonanServiceBasePredictionRequest, KonanServiceBasePredictionResponse,
-    KonanServiceBaseEvaluateRequest, KonanServiceBaseEvaluateResponse
+    KonanServiceBaseEvaluateRequest, KonanServiceBaseEvaluateResponse,
+    KonanServiceEvaluation,
 )
 
 from titanic_enums import (
@@ -23,6 +25,7 @@ from utils.encoding import (
     one_hot_encode,
     ordinal_encode,
 )
+from utils.metrics import accuracy
 
 
 ARTIFACTS_DIR = '/app/artifacts'
@@ -112,7 +115,22 @@ class MyModel(KonanServiceBaseModel):
         Returns:
             KonanServiceEvaluateResponse: the evaluation(s) of the model based on some metrics
         """
-        raise NotImplementedError
+        # Use your logic to make an evaluation
+        # Create a KonanServiceBaseEvaluateResponse object using kwargs
+        sample_evaluation = KonanServiceBaseEvaluateResponse(
+            # results should be a list of KonanServiceEvaluation objects
+            # define each KonanServiceEvaluation object using kwargs
+            results=[
+                KonanServiceEvaluation(
+                    metric_name="accuracy",
+                    metric_value=accuracy(
+                        y_pred=np.array([x.prediction.survived for x in req.data]),
+                        y_true=np.array([x.target.survived for x in req.data]),
+                    )
+                ),
+            ],
+        )
+        return sample_evaluation
 
 
 app = KonanService(MyPredictionRequest, MyPredictionResponse, MyModel)
