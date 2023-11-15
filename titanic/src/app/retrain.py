@@ -2,6 +2,9 @@ import joblib
 import json
 import sys
 import yaml
+import os
+import ast
+import requests
 from typing import Optional
 
 import pandas as pd
@@ -11,12 +14,10 @@ from sklearn.neighbors import KNeighborsClassifier
 from utils.encoding import one_hot_encode, ordinal_encode
 from utils.pipeline import run_testing, run_training
 
-RETRAINING_DIR_PATH = "/retraining"
-METRICS_FILE_PATH = f"{RETRAINING_DIR_PATH}/metrics.json"
-ARTIFACTS_DIR_PATH = f"{RETRAINING_DIR_PATH}/artifacts"
-DATA_DIR_PATH = f"{RETRAINING_DIR_PATH}/data"
-TRAINING_DATA_FILE_PATH = f"{DATA_DIR_PATH}/training.csv"
-SERVING_DATA_FILE_PATH = f"{DATA_DIR_PATH}/serving.csv"
+ARTIFACTS_DIR_PATH = '/app/artifacts'
+METRICS_JSON_PATH = ast.literal_eval(os.getenv("METRICS_JSON_PATH"))
+TRAINING_DATA_PATH = os.getenv("TRAINING_DATA_PATH")
+SERVING_DATA_PATH = os.getenv("SERVING_DATA_PATH")
 
 
 def retrain():
@@ -26,12 +27,12 @@ def retrain():
     training_data: Optional[pd.DataFrame] = None
     serving_data: Optional[pd.DataFrame] = None
     try:
-        training_data = pd.read_csv(TRAINING_DATA_FILE_PATH)
+        training_data = pd.read_csv(TRAINING_DATA_PATH)
         training_data['survived'].map({"yes": 1, "no": 0})
     except:
         pass
     try:
-        serving_data = pd.read_csv(SERVING_DATA_FILE_PATH)
+        serving_data = pd.read_csv(SERVING_DATA_PATH)
         # rename "ground_truth" to "survived"
         serving_data.rename(columns={'ground_truth': 'survived'}, inplace=True)
         serving_data['survived'].map({"yes": 1, "no": 0})
@@ -179,9 +180,13 @@ def retrain():
         },
     }
 
-    print('Saving retraining metrics')
-    with open(METRICS_FILE_PATH, 'w') as file:
+    with open('metrics.json', 'w') as file:
         json.dump(retraining_metrics, file)
+
+    print('Saving retraining metrics')
+    with open('metrics.json', 'rb') as file:
+        files = {'file': ('metrics.json', file)}
+        _ = requests.post(METRICS_JSON_PATH['url'], data=METRICS_JSON_PATH['fields'], files=files)
 
     print('Retraining successfully completed')
 
